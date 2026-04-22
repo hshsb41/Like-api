@@ -302,8 +302,8 @@ def load_accounts():
 def load_tokens_with_validation(server_name):
     """Load tokens and check expiry"""
     filepath = None
-    if server_name == "BD":
-        filepath = TOKEN_FILE_BD
+    if server_name == "IND":
+        filepath = TOKEN_FILE_IND
     elif server_name in ["BR", "US", "SAC", "NA"]:
         filepath = TOKEN_FILE_BR
     else:
@@ -364,8 +364,8 @@ def refresh_expired_tokens(server_name):
     
     # Determine filepath
     filepath = None
-    if server_name == "BD":
-        filepath = TOKEN_FILE_BD
+    if server_name == "IND":
+        filepath = TOKEN_FILE_IND
     elif server_name in ["BR", "US", "SAC", "NA"]:
         filepath = TOKEN_FILE_BR
     else:
@@ -577,8 +577,8 @@ def decode_player_info(binary_data):
 
 def get_player_info(encrypted_uid, server_name, token):
     try:
-        if server_name == "BD":
-            url = "https://clientbp.ggwhitehawk.com/GetPlayerPersonalShow"
+        if server_name == "IND":
+            url = "https://client.ind.freefiremobile.com/GetPlayerPersonalShow"
         elif server_name in ["BR", "US", "SAC", "NA"]:
             url = "https://client.us.freefiremobile.com/GetPlayerPersonalShow"
         else:
@@ -696,7 +696,7 @@ def api_refresh_all():
 
 @app.route('/refresh_expired', methods=['GET'])
 def api_refresh_expired():
-    server_name = request.args.get("server_name", "BD").upper()
+    server_name = request.args.get("server_name", "IND").upper()
     
     def run():
         refresh_expired_tokens(server_name)
@@ -710,7 +710,7 @@ def api_refresh_expired():
 
 @app.route('/token_status', methods=['GET'])
 def api_token_status():
-    server_name = request.args.get("server_name", "BD").upper()
+    server_name = request.args.get("server_name", "IND").upper()
     
     valid_tokens, expired_count, total_count = load_tokens_with_validation(server_name)
     
@@ -840,8 +840,8 @@ def handle_like():
         app.logger.info(f"Before: {player_name} has {before_likes} likes")
         
         # Select like URL
-        if server_name == "BD":
-            like_url = "https://clientbp.ggwhitehawk.com/LikeProfile"
+        if server_name == "IND":
+            like_url = "https://client.ind.freefiremobile.com/LikeProfile"
         elif server_name in ["BR", "US", "SAC", "NA"]:
             like_url = "https://client.us.freefiremobile.com/LikeProfile"
         else:
