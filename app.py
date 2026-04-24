@@ -244,7 +244,7 @@ def generate_jwt_token(uid, password):
     serialized = game_data.SerializeToString()
     encrypted = encrypt_aes(AES_KEY, AES_IV, serialized)
     
-    url = "https://loginbp.ggblueshark.com/MajorLogin"
+    url = "https://loginbp.ggpolarbear.com/MajorLogin"
     headers = {
         'User-Agent': "Dalvik/2.1.0 (Linux; U; Android 9; ASUS_Z01QD Build/PI)",
         'Connection': "Keep-Alive",
@@ -582,7 +582,7 @@ def get_player_info(encrypted_uid, server_name, token):
         elif server_name in ["BR", "US", "SAC", "NA"]:
             url = "https://client.us.freefiremobile.com/GetPlayerPersonalShow"
         else:
-            url = "https://clientbp.ggblueshark.com/GetPlayerPersonalShow"
+            url = "https://clientbp.ggpolarbear.com/GetPlayerPersonalShow"
         
         edata = bytes.fromhex(encrypted_uid)
         headers = {
@@ -845,7 +845,7 @@ def handle_like():
         elif server_name in ["BR", "US", "SAC", "NA"]:
             like_url = "https://client.us.freefiremobile.com/LikeProfile"
         else:
-            like_url = "https://clientbp.ggblueshark.com/LikeProfile"
+            like_url = "https://clientbp.ggpolarbear.com/LikeProfile"
         
         # Send likes
         asyncio.run(send_multiple_likes(uid, server_name, like_url, valid_tokens))
